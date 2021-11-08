@@ -58,4 +58,28 @@ class TodoController
             ));
         }
     }
+
+    public function wpstm_change_todo_status()
+    {
+        $id = $_REQUEST['id'];
+        if (isset($id) && !empty($id)) {
+            $row = $this->model->find($id);
+            $status = $row->completed;
+            $row->completed = $row->completed === '0' ? 1 : 0;
+            $this->model->update((array)$row, $id);
+            if ($status === $row->completed) {
+                wp_send_json(array(
+                    'status' => false,
+                    'message' => 'Something went wrong! Please try again latter.',
+                    'completed' => $status
+                ));
+            } else {
+                wp_send_json(array(
+                    'status' => true,
+                    'message' => 'Status change successfully!',
+                    'completed' => $row->completed
+                ));
+            }
+        }
+    }
 }

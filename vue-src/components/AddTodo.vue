@@ -94,6 +94,6 @@ input {
   padding: 7px 15px;
   font-size: 16px;
   text-transform: capitalize;
-  border-radius: 0 5px 5px 0px;
+  border-radius: 0 5px 5px 0;
 }
 </style>

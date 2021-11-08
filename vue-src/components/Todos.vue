@@ -2,11 +2,13 @@
   <div>
     <h1>All todos</h1>
     <div class="todo_container">
-      <div v-for="todo in todos" :class="[Number(todo.completed)?'completed':'']" class="todo_item"
-           :key="todo.id">
-        <input type="checkbox" :checked="Number(todo.completed)"/>
+      <div v-for="{completed, id, todo_name} in todos" :class="[Number(completed)?'completed':'']"
+           @dblclick="changeTodoStatus(id)" class="todo_item"
+           title="Double click for change status."
+           :key="id">
+        <input type="checkbox" @change="changeTodoStatus(id)" :checked="Number(completed)"/>
         <h4 class="todo_title">
-          {{ todo.todo_name }}
+          {{ todo_name }}
         </h4>
       </div>
     </div>
@@ -65,20 +67,55 @@ export default {
       })
     }
 
+    function changeTodoStatus(id) {
+      $.ajax({
+        url: ajaxurl,
+        type: "POST",
+        data: {
+          id: id,
+          action: 'wpstm_change_todo_status',
+        },
+        beforeSend() {
+        },
+        success(res) {
+          if (res.status) {
+            const todo = todos.value.find(todo => todo.id === id)
+            todo.completed = res.completed;
+          } else {
+            Swal.fire({
+              title: 'Error!',
+              text: res.message,
+              icon: 'error'
+            })
+          }
+        },
+        error(req, _, err) {
+          Swal.fire({
+            title: 'Error!',
+            text: err.message,
+            icon: 'error'
+          })
+        }
+
+      })
+    }
+
     return {
-      todos
+      todos,
+      changeTodoStatus
     }
   }
 }
 </script>
 
 <style scoped>
-h1{
+h1 {
   color: gray;
   font-size: 30px;
   text-align: center;
   text-transform: capitalize;
 }
+
 .todo_container {
   display: flex;
   flex-wrap: wrap;

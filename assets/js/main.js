@@ -17579,8 +17579,42 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
 
+    function changeTodoStatus(id) {
+      $.ajax({
+        url: ajaxurl,
+        type: "POST",
+        data: {
+          id: id,
+          action: 'wpstm_change_todo_status'
+        },
+        beforeSend: function beforeSend() {},
+        success: function success(res) {
+          if (res.status) {
+            var todo = todos.value.find(function (todo) {
+              return todo.id === id;
+            });
+            todo.completed = res.completed;
+          } else {
+            Swal.fire({
+              title: 'Error!',
+              text: res.message,
+              icon: 'error'
+            });
+          }
+        },
+        error: function error(req, _, err) {
+          Swal.fire({
+            title: 'Error!',
+            text: err.message,
+            icon: 'error'
+          });
+        }
+      });
+    }
+
     return {
-      todos: todos
+      todos: todos,
+      changeTodoStatus: changeTodoStatus
     };
   }
 });
@@ -17695,25 +17729,36 @@ var _hoisted_1 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_2 = {
   "class": "todo_container"
 };
-var _hoisted_3 = ["checked"];
-var _hoisted_4 = {
+var _hoisted_3 = ["onDblclick"];
+var _hoisted_4 = ["onChange", "checked"];
+var _hoisted_5 = {
   "class": "todo_title"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.todos, function (todo) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.todos, function (_ref) {
+    var completed = _ref.completed,
+        id = _ref.id,
+        todo_name = _ref.todo_name;
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([[Number(todo.completed) ? 'completed' : ''], "todo_item"]),
-      key: todo.id
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([[Number(completed) ? 'completed' : ''], "todo_item"]),
+      onDblclick: function onDblclick($event) {
+        return $setup.changeTodoStatus(id);
+      },
+      title: "Double click for change status.",
+      key: id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
       type: "checkbox",
-      checked: Number(todo.completed)
-    }, null, 8
-    /* PROPS */
-    , _hoisted_3), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(todo.todo_name), 1
+      onChange: function onChange($event) {
+        return $setup.changeTodoStatus(id);
+      },
+      checked: Number(completed)
+    }, null, 40
+    /* PROPS, HYDRATE_EVENTS */
+    , _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(todo_name), 1
     /* TEXT */
-    )], 2
-    /* CLASS */
-    );
+    )], 42
+    /* CLASS, PROPS, HYDRATE_EVENTS */
+    , _hoisted_3);
   }), 128
   /* KEYED_FRAGMENT */
   ))])]);
@@ -17796,7 +17841,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nh1[data-v-36ceecae] {\n  color: gray;\n  font-size: 30px;\n  text-align: center;\n  text-transform: capitalize;\n}\ninput[data-v-36ceecae] {\n  padding: 2px 4px;\n}\n.add_todo_button[data-v-36ceecae] {\n  border: 0;\n  background: goldenrod;\n  display: inline-block;\n  color: white;\n  padding: 7px 15px;\n  font-size: 16px;\n  text-transform: capitalize;\n  border-radius: 0 5px 5px 0px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nh1[data-v-36ceecae] {\n  color: gray;\n  font-size: 30px;\n  text-align: center;\n  text-transform: capitalize;\n}\ninput[data-v-36ceecae] {\n  padding: 2px 4px;\n}\n.add_todo_button[data-v-36ceecae] {\n  border: 0;\n  background: goldenrod;\n  display: inline-block;\n  color: white;\n  padding: 7px 15px;\n  font-size: 16px;\n  text-transform: capitalize;\n  border-radius: 0 5px 5px 0;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17820,7 +17865,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nh1[data-v-507fc5d4]{\n  color: gray;\n  font-size: 30px;\n  text-align: center;\n  text-transform: capitalize;\n}\n.todo_container[data-v-507fc5d4] {\n  display: flex;\n  flex-wrap: wrap;\n}\n.todo_item[data-v-507fc5d4] {\n  min-width: 200px;\n  background: goldenrod;\n  margin: 10px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 8px;\n  border-radius: 4px;\n}\n.todo_title[data-v-507fc5d4]:first-letter {\n  text-transform: capitalize;\n}\n.todo_item.completed[data-v-507fc5d4] {\n  background: #1c7430;\n  color: white;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nh1[data-v-507fc5d4] {\n  color: gray;\n  font-size: 30px;\n  text-align: center;\n  text-transform: capitalize;\n}\n.todo_container[data-v-507fc5d4] {\n  display: flex;\n  flex-wrap: wrap;\n}\n.todo_item[data-v-507fc5d4] {\n  min-width: 200px;\n  background: goldenrod;\n  margin: 10px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 8px;\n  border-radius: 4px;\n}\n.todo_title[data-v-507fc5d4]:first-letter {\n  text-transform: capitalize;\n}\n.todo_item.completed[data-v-507fc5d4] {\n  background: #1c7430;\n  color: white;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
