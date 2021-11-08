@@ -1,16 +1,14 @@
 <template>
-<div class="vue-app">
-  <router-view></router-view>
-</div>
+  <div class="vue-app">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
 export default {
   name: "App",
-  data(){
-    return{
-      name:"abc"
-    }
+  data() {
+
   }
 }
 </script>
