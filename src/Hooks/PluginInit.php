@@ -3,12 +3,14 @@
 namespace Hr\WpSTM\Hooks;
 
 use Hr\WpSTM\Router\Router;
+use Hr\WpSTM\Model\TodoModel;
 
 class PluginInit
 {
     protected $loader;
     protected $name;
     protected $version;
+    protected $model;
 
     public function __construct()
     {
@@ -16,10 +18,12 @@ class PluginInit
         $this->version = '1.0';
         $this->loader = new PluginLoader();
         new PluginAdmin();
+        new ShortCode();
         $this->activateMe();
         $this->deactivation();
         $this->wpstm_load_asset();
         new Router($this->loader);
+        $this->model = new TodoModel();
     }
 
     public function run()
@@ -30,13 +34,14 @@ class PluginInit
     // activation method
     public function activateMe()
     {
-        register_activation_hook(PUBLIC_PLUGIN_PATH, array($this, 'wpstm_register_activation_hook'));
+        register_activation_hook(WPSTM_PUBLIC_PLUGIN_PATH, array($this, 'wpstm_register_activation_hook'));
+
     }
 
     // deactivation method
     public function deactivation()
     {
-        register_deactivation_hook(PUBLIC_PLUGIN_PATH, array($this, 'wpstm_uninstall_all_tables'));
+        register_deactivation_hook(WPSTM_PUBLIC_PLUGIN_PATH, array($this, 'wpstm_uninstall_all_tables'));
     }
 
     // register activation hook
@@ -74,20 +79,36 @@ class PluginInit
     // load all assets
     public function wpstm_load_asset()
     {
-        $this->loader->add_filter('admin_enqueue_scripts', array($this, 'wpstm_load_public_style'));
-        $this->loader->add_action('admin_enqueue_scripts', array($this, 'wpstm_load_public_script'));
+        $this->loader->add_action('admin_enqueue_scripts', array($this, 'wpstm_load_admin_script'));
+        $this->loader->add_action('wp_enqueue_scripts', array($this, 'wpstm_load_public_assets'));
     }
 
-    // enqueue public style
-    public function wpstm_load_public_style()
-    {
-        wp_enqueue_style('wpstm_css', plugin_dir_url(PUBLIC_PLUGIN_PATH) . 'assets/css/style.css');
-    }
 
     // enqueue public style
-    public function wpstm_load_public_script()
+    public function wpstm_load_admin_script()
     {
-        wp_enqueue_script('wpstm_script', plugin_dir_url(PUBLIC_PLUGIN_PATH) . 'assets/js/main.js', $this->version, ['jquery'], true);
+        wp_enqueue_style('wpstm_css', plugin_dir_url(WPSTM_PUBLIC_PLUGIN_PATH) . 'assets/css/style.css');
+
+        wp_enqueue_script('wpstm_script', plugin_dir_url(WPSTM_PUBLIC_PLUGIN_PATH) . 'assets/js/main.js', $this->version, ['jquery'], true);
+        wp_localize_script('wpstm_script', 'ajax_object', array(
+            'nonce' => wp_create_nonce(WPSTM_NONCE)
+        ));
     }
+
+    public function wpstm_load_public_assets()
+    {
+        wp_enqueue_style('wpstm_frontend_css', plugin_dir_url(WPSTM_PUBLIC_PLUGIN_PATH) . 'assets/css/wpstm_frontend.css');
+
+        wp_enqueue_script('wpstm_frontend_jQuery-script', 'https://code.jquery.com/jquery-3.6.0.min.js', 0, [], true);
+
+        wp_enqueue_script('wpstm_frontend_script', plugin_dir_url(WPSTM_PUBLIC_PLUGIN_PATH) . 'assets/js/wpstm_frontend.js', $this->version, ['jquery'], true);
+
+        wp_localize_script('wpstm_frontend_script', 'ajax_object', array(
+            'ajaxurl' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce(WPSTM_NONCE)
+        ));
+
+    }
+
 
 }

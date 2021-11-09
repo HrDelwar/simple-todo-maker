@@ -25,8 +25,9 @@
  */
 require 'vendor/autoload.php';
 
-const PUBLIC_PLUGIN_PATH = __FILE__;
+const WPSTM_PUBLIC_PLUGIN_PATH = __FILE__;
 const wpstm_todos_table = 'wpstm_todos';
+const WPSTM_NONCE = 'WPSTM54321';
 use Hr\WpSTM\Hooks\PluginInit;
 
 $wpstm = new PluginInit();

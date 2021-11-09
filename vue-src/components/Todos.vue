@@ -7,9 +7,12 @@
            title="Double click for change status."
            :key="id">
         <input type="checkbox" @change="changeTodoStatus(id)" :checked="Number(completed)"/>
-        <h4 class="todo_title">
+        <h4 class="todo_title no_select">
           {{ todo_name }}
         </h4>
+        <button class="todo_delete_btn" @click="deleteTodo(id)">
+          <unicon name="trash-alt" fill="red"></unicon>
+        </button>
       </div>
     </div>
 
@@ -36,6 +39,7 @@ export default {
         type: 'GET',
         data: {
           action: 'wpstm_get_all_todo',
+          nonce: ajax_object.nonce
         },
         beforeSend() {
         },
@@ -58,9 +62,10 @@ export default {
           }
         },
         error(req, _, err) {
+
           Swal.fire({
             title: 'Error!',
-            text: err.message,
+            text: err,
             icon: 'error'
           })
         }
@@ -74,6 +79,7 @@ export default {
         data: {
           id: id,
           action: 'wpstm_change_todo_status',
+          nonce: ajax_object.nonce
         },
         beforeSend() {
         },
@@ -92,7 +98,7 @@ export default {
         error(req, _, err) {
           Swal.fire({
             title: 'Error!',
-            text: err.message,
+            text: err,
             icon: 'error'
           })
         }
@@ -100,9 +106,62 @@ export default {
       })
     }
 
+    function deleteTodo(id) {
+
+      Swal.fire({
+        title: 'Info!',
+        text: 'Sure you want to delete this?',
+        icon: 'info',
+        showDenyButton: true,
+        confirmButtonText: 'Delete',
+        denyButtonText: `Cancel`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            url: ajaxurl,
+            type: 'POST',
+            data: {
+              id,
+              action: 'wpstm_delete_todo',
+              nonce: ajax_object.nonce
+            },
+            beforeSend() {
+            },
+            success(res) {
+              if (res.status) {
+                Swal.fire({
+                  title: 'Success!',
+                  text: res.message,
+                  icon: 'success',
+                  position: 'center',
+                  confirmButton: false,
+                  timer: 1500
+                })
+                todos.value = todos.value.filter(todo => todo.id !== id);
+              } else {
+                Swal.fire({
+                  title: 'Error!',
+                  text: res.message,
+                  icon: 'error'
+                })
+              }
+            },
+            error(req, _, err) {
+              Swal.fire({
+                title: 'Error!',
+                text: err,
+                icon: 'error'
+              })
+            }
+          })
+        }
+      })
+    }
+
     return {
       todos,
-      changeTodoStatus
+      changeTodoStatus,
+      deleteTodo
     }
   }
 }
@@ -139,5 +198,26 @@ h1 {
 .todo_item.completed {
   background: #1c7430;
   color: white;
+}
+
+.todo_item:hover .todo_delete_btn {
+  display: block;
+}
+
+.no_select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+}
+
+.todo_delete_btn {
+  background: white;
+  border: 0;
+  border-radius: 4px;
+  color: red;
+  display: none;
+  cursor: pointer;
 }
 </style>

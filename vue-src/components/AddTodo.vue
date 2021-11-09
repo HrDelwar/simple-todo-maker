@@ -1,5 +1,5 @@
 <template>
-  <div class="add-task">
+  <div class="add-todo">
     <div class="">
       <div class="">
         <h1>Add New Todo</h1>
@@ -29,7 +29,8 @@ export default {
     function addTodo() {
       const data = {
         action: 'wpstm_create_todo',
-        todo_name: todo_name.value
+        todo_name: todo_name.value,
+        nonce: ajax_object.nonce
       }
       $.ajax({
         url: ajaxurl,
@@ -59,7 +60,7 @@ export default {
         error(req, _, err) {
           Swal.fire({
             title: 'Error!',
-            text: err.message,
+            text: err,
             icon: 'error'
           })
         }

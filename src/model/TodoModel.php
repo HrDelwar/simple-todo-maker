@@ -33,4 +33,9 @@ class TodoModel
     {
         return $this->_wpdb->update($this->tableName, $data, array('id' => $id));
     }
+
+    public function destroy($id)
+    {
+        return $this->_wpdb->delete($this->tableName, array('id' => $id));
+    }
 }
