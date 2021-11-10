@@ -1,0 +1,86 @@
+.todos_view h1 {
+    color: gray;
+    font-size: 30px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.todos_view .todo_container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.todos_view .todo_item {
+    min-width: 200px;
+    background: goldenrod;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 8px;
+    border-radius: 4px;
+    min-height: 56px;
+}
+
+.todos_view .todo_item .todo_title{
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.todos_view .todo_title:first-letter {
+    text-transform: capitalize;
+}
+
+.todos_view .todo_item.active {
+    background: #1c7430;
+    color: white;
+}
+
+.todos_view .todo_item:hover .todo_delete_btn {
+    display: block;
+}
+
+.todos_view .no_select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+.todos_view .todo_delete_btn {
+    background: white;
+    border: 0;
+    border-radius: 4px;
+    color: red;
+    display: none;
+    cursor: pointer;
+    padding: 1px 7px;
+}
+
+.todos_view input[type="checkbox"]{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    width: 17px;
+    height: 17px;
+    border: var(--form--border-width) solid var(--form--border-color);
+    background: var(--global--color-white);
+    border-radius: 2px;
+    border-width: 1px;
+}
+
+.todos_view input[type="checkbox"]::after {
+    content: "";
+    opacity: 0;
+    display: block;
+    left: 5px;
+    top: 0px;
+    position: absolute;
+    width: 7px;
+    height: 13px;
+    border: 3px solid var(--form--color-text);
+    border-top: 0;
+    border-left: 0;
+    transform: rotate(30deg);
+}

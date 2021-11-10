@@ -1,3 +1,7 @@
+*:focus {
+    outline: none !important;
+}
+
 .add_todo_tittle {
     color: black;
     font-size: 30px;
@@ -13,10 +17,12 @@
     border-radius: 4px;
     color: #656161;
 }
-#add_todo_form{
+
+#add_todo_form {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
+
 #add_todo_form input:focus {
     outline: none;
 }

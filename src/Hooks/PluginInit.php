@@ -4,6 +4,8 @@ namespace Hr\WpSTM\Hooks;
 
 use Hr\WpSTM\Router\Router;
 use Hr\WpSTM\Model\TodoModel;
+use Hr\WpSTM\Shortcode\AddTodo;
+use Hr\WpSTM\Shortcode\AllTodo;
 
 class PluginInit
 {
@@ -18,12 +20,18 @@ class PluginInit
         $this->version = '1.0';
         $this->loader = new PluginLoader();
         new PluginAdmin();
-        new ShortCode();
         $this->activateMe();
         $this->deactivation();
         $this->wpstm_load_asset();
         new Router($this->loader);
         $this->model = new TodoModel();
+        $this->wpstm_init_shortcode();
+    }
+
+    public function wpstm_init_shortcode()
+    {
+        new AddTodo();
+        new AllTodo();
     }
 
     public function run()
@@ -97,18 +105,14 @@ class PluginInit
 
     public function wpstm_load_public_assets()
     {
-        wp_enqueue_style('wpstm_frontend_css', plugin_dir_url(WPSTM_PUBLIC_PLUGIN_PATH) . 'assets/css/wpstm_frontend.css');
 
-        wp_enqueue_script('wpstm_frontend_jQuery-script', 'https://code.jquery.com/jquery-3.6.0.min.js', 0, [], true);
+        wp_enqueue_style('wpstm_fontawesome', 'https://use.fontawesome.com/releases/v5.15.4/css/all.css');
 
-        wp_enqueue_script('wpstm_frontend_script', plugin_dir_url(WPSTM_PUBLIC_PLUGIN_PATH) . 'assets/js/wpstm_frontend.js', $this->version, ['jquery'], true);
+        wp_enqueue_script('wpstm_sweetalert2', plugin_dir_url(WPSTM_PUBLIC_PLUGIN_PATH) . 'assets/js/sweetalert2.all.min.js');
 
-        wp_localize_script('wpstm_frontend_script', 'ajax_object', array(
+        wp_localize_script('wpstm_sweetalert2', 'ajax_object', array(
             'ajaxurl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce(WPSTM_NONCE)
         ));
-
     }
-
-
 }
