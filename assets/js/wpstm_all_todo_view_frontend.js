@@ -1,20 +1,25 @@
 (function ($) {
     $(document).ready(function () {
-        $("input[id*='check_view_input-']").on('click', function () {
-            const inputId = $(this)[0].id.split('-').reverse()[0];
-            changeTodoStatus(inputId);
-        });
 
-        $("div[id*='todo_view_item-']").on('dblclick', function () {
-            const inputId = $(this)[0].id.split('-').reverse()[0];
-            changeTodoStatus(inputId);
-        })
+        window.wpstm_todos_global_register_event = function wpstm_todos_global_register_event() {
+            $("input[id*='check_view_input-']").on('click', function () {
+                const inputId = $(this)[0].id.split('-').reverse()[0];
+                changeTodoStatus(inputId);
+            });
 
-        $("button[id*='todo_view_delte_btn-']").on('click', function () {
-            const inputId = $(this)[0].id.split('-').reverse()[0];
-            deleteTodo(inputId);
-        })
+            $("div[id*='todo_view_item-']").on('dblclick', function () {
+                const inputId = $(this)[0].id.split('-').reverse()[0];
+                changeTodoStatus(inputId);
+            })
 
+            $("button[id*='todo_view_delte_btn-']").on('click', function () {
+                const inputId = $(this)[0].id.split('-').reverse()[0];
+                deleteTodo(inputId);
+            })
+
+        }
+
+        wpstm_todos_global_register_event();
 
         function changeTodoStatus(id) {
             $.ajax({

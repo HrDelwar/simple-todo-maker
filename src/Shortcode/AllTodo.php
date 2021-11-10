@@ -34,14 +34,15 @@ class AllTodo
         $todos = $this->todoModel->getAll();
 
         if (!(count($todos) > 0)) {
-            $content = '
-            <div>
+            $content .= '
+            <div class="todos_view">
                  <h1 class="todos_title">' . $title . '</h1>
-                <div class="todo_container">
-                  <h2>There is no todo in your list!</h2>
+                <div class="todo_container" id="todo_view_container">
+                  <p id="todo_not_found_p">There is no todo in your list!</p>
                 </div>
             </div>
             ';
+			return $content;
         }
 
 

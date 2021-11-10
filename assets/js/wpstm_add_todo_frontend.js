@@ -24,8 +24,14 @@
                             position: 'bottom-end',
                             showConfirmButton: false,
                         })
+
+                        //catch todos parent div
                         const todosParent = $('#todo_view_container');
-                        if (todosParent) {
+
+                        //check todosParent is render in dom
+                        if (Object.keys(todosParent).length > 0) {
+
+                            // append new inside todos parent
                             todosParent.prepend(`
                             <div class='todo_item ' id='todo_view_item-${res.id}' title = 'Double click for change status.'>
                                 <input type = 'checkbox' id = 'check_view_input-${res.id}' >
@@ -36,9 +42,20 @@
                                    <i class='far fa-trash-alt'></i>
                                  </button >
                              </div >
-`);
+                            `);
+
+                            // clear todos not found message
+                            const not_fount = $('#todo_not_found_p');
+                            if (Object.keys(not_fount).length > 0) {
+                                not_fount.hide();
+                            }
+
+                            // re register event in todos view
+                            wpstm_todos_global_register_event()
                         }
-                        inputBtn.val('')
+
+                        // clear input  value
+                        inputBtn.val('');
                     } else {
                         Swal.fire({
                             title: 'Error!',

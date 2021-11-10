@@ -1,5 +1,5 @@
 {
-  "name": "hrdelwar/wp-simple-todo-maker",
+  "name": "hrdelwar/simple-todo-maker",
   "autoload": {
     "psr-4": {
       "Hr\\WpSTM\\": "src/"
@@ -7,9 +7,10 @@
   },
   "authors": [
     {
-      "name": "Hr Delwar",
+      "name": "HrDelwar",
       "email": "hrdelwar75@gmail.com"
     }
   ],
   "require": {}
 }
+
