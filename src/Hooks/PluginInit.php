@@ -38,7 +38,6 @@ class PluginInit {
 	// activation method
 	public function activateMe() {
 		register_activation_hook( WPSTM_PUBLIC_PLUGIN_PATH, array( $this, 'wpstm_register_activation_hook' ) );
-
 	}
 
 	// deactivation method
@@ -54,7 +53,7 @@ class PluginInit {
 	// register activation hook
 	public function wpstm_register_activation_hook() {
 		$this->wpstm_install_required_table();
-		$this->uninstall();
+        $this->uninstall();
 	}
 
 	// activation method for install required table

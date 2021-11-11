@@ -14,5 +14,7 @@ export default {
 </script>
 
 <style scoped>
-
+.vue-app {
+  padding-right: 14px;
+}
 </style>

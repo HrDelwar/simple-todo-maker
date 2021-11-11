@@ -11,7 +11,7 @@
 }
 
 .todos_view .todo_item {
-    min-width: 200px;
+    width: 200px;
     background: goldenrod;
     margin: 10px;
     display: flex;
@@ -34,8 +34,12 @@
 .todos_view .todo_item.active {
     background: #1c7430;
     color: white;
+    text-decoration: line-through;
 }
-
+.todos_view  .item_wraper{
+    display: flex;
+    align-items: center;
+}
 .todos_view .todo_item:hover .todo_delete_btn {
     display: block;
 }
@@ -70,17 +74,16 @@
     border-width: 1px;
 }
 
-.todos_view input[type="checkbox"]::after {
-    content: "";
-    opacity: 0;
-    display: block;
-    left: 5px;
-    top: 0px;
-    position: absolute;
-    width: 7px;
-    height: 13px;
-    border: 3px solid var(--form--color-text);
-    border-top: 0;
-    border-left: 0;
-    transform: rotate(30deg);
+.todos_view input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    width: 17px;
+    height: 17px;
+    border: 1px solid blanchedalmond;
+    background: white;
+    border-radius: 2px;
+    margin-right: 7px;
+    display: inline-block;
+    padding: 0;
 }

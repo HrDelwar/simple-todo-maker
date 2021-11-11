@@ -60,11 +60,13 @@ class AllTodo
             $_active = boolval($todo['completed']) ? 'active ' : '';
             $content .= "
             <div class='todo_item $_active' id='todo_view_item-$id' title = 'Double click for change status.'>
-                <input type = 'checkbox' id = 'check_view_input-$id' $checked>
-                <h4 class='todo_title no_select' >
-                    $name
-                </h4 >
-                <button class='todo_delete_btn' id='todo_view_delte_btn-$id'>
+                <div class='item_wraper'>
+                    <input type = 'checkbox' title='click for change status' id = 'check_view_input-$id' $checked>
+                    <h4 class='todo_title no_select' >
+                        $name
+                    </h4 >
+                </div>
+                <button class='todo_delete_btn' title='Delete todo' id='todo_view_delte_btn-$id'>
                    <i class='far fa-trash-alt'></i>
                  </button >
              </div >";

@@ -9,12 +9,18 @@ class PluginAdmin
 
     protected $admin_vue;
 
+
     public function __construct()
     {
         $this->wpstm_register_admin_menu();
         $this->admin_vue = new Admin();
     }
 
+// register admin menu
+    public function wpstm_register_admin_menu()
+    {
+        add_action('admin_menu', array($this, 'wpstm_admin_menu'));
+    }
 
 //  admin menu setup
     public function wpstm_admin_menu()
@@ -30,10 +36,19 @@ class PluginAdmin
         );
         add_submenu_page(
             'todos',
+            'Shortcodes',
+            'Available Shortcode',
+            'manage_options',
+            'todos',
+            array(&$this, 'load_view')
+        );
+
+        add_submenu_page(
+            'todos',
             'Todos',
             'Todos',
             'manage_options',
-            'todos',
+            'todos#/todos',
             array(&$this, 'load_view')
         );
         add_submenu_page(
@@ -52,9 +67,4 @@ class PluginAdmin
         $this->admin_vue->wpstm_vue_rander();
     }
 
-    // register admin menu
-    public function wpstm_register_admin_menu()
-    {
-        add_action('admin_menu', array($this, 'wpstm_admin_menu'));
-    }
 }

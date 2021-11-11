@@ -34,10 +34,12 @@
                             // append new inside todos parent
                             todosParent.prepend(`
                             <div class='todo_item ' id='todo_view_item-${res.id}' title = 'Double click for change status.'>
-                                <input type = 'checkbox' id = 'check_view_input-${res.id}' >
-                                <h4 class='todo_title no_select' >
-                                    ${inputBtn.val()}
-                                </h4 >
+                                <div class="item_wraper">
+                                    <input type = 'checkbox' id = 'check_view_input-${res.id}' >
+                                    <h4 class='todo_title no_select' >
+                                        ${inputBtn.val()}
+                                    </h4 >
+                                </div>
                                 <button class='todo_delete_btn' id='todo_view_delte_btn-${res.id}'>
                                    <i class='far fa-trash-alt'></i>
                                  </button >

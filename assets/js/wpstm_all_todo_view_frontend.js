@@ -36,10 +36,10 @@
                     if (res.status) {
                         const element = $("#check_view_input-" + id);
                         if (res.completed) {
-                            element.parent().addClass('active')
+                            $("#todo_view_item-" + id).addClass('active')
                             element.prop("checked", true)
                         } else {
-                            element.parent().removeClass('active')
+                            $("#todo_view_item-" + id).removeClass('active')
                             element.prop("checked", false)
                         }
                     } else {

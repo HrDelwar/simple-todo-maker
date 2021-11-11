@@ -6,11 +6,14 @@
            @dblclick="changeTodoStatus(id)" class="todo_item"
            title="Double click for change status."
            :key="id">
-        <input type="checkbox" @change="changeTodoStatus(id)" :checked="Number(completed)"/>
-        <h4 class="todo_title no_select">
-          {{ todo_name }}
-        </h4>
-        <button class="todo_delete_btn" @click="deleteTodo(id)">
+        <div class="title-wraper">
+          <input type="checkbox" title="click for change status" @change="changeTodoStatus(id)" :checked="Number(completed)"/>
+          <h4 class="todo_title no_select">
+            {{ todo_name }}
+          </h4>
+        </div>
+
+        <button class="todo_delete_btn" title="Delete todo" @click="deleteTodo(id)">
           <unicon name="trash-alt" fill="red"></unicon>
         </button>
       </div>
@@ -174,14 +177,17 @@ h1 {
   text-align: center;
   text-transform: capitalize;
 }
-
+.title-wraper{
+  display: flex;
+  align-items: center;
+}
 .todo_container {
   display: flex;
   flex-wrap: wrap;
 }
 
 .todo_item {
-  min-width: 200px;
+  width: 200px;
   background: goldenrod;
   margin: 10px;
   display: flex;
@@ -198,6 +204,7 @@ h1 {
 .todo_item.completed {
   background: #1c7430;
   color: white;
+  text-decoration: line-through;
 }
 
 .todo_item:hover .todo_delete_btn {
