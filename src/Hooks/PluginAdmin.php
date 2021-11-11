@@ -9,21 +9,19 @@ class PluginAdmin
 
     protected $admin_vue;
 
-
     public function __construct()
     {
-        $this->wpstm_register_admin_menu();
         $this->admin_vue = new Admin();
     }
 
 // register admin menu
     public function wpstm_register_admin_menu()
     {
-        add_action('admin_menu', array($this, 'wpstm_admin_menu'));
+        add_action('admin_menu', array($this, 'wpstm_add_admin_menu'));
     }
 
 //  admin menu setup
-    public function wpstm_admin_menu()
+    public function wpstm_add_admin_menu()
     {
         add_menu_page(
             'Todo Maker',
