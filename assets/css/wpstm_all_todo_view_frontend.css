@@ -40,6 +40,10 @@
     display: flex;
     align-items: center;
 }
+.todos_view .todo_item.active h4 {
+    color: white !important;
+}
+
 .todos_view .todo_item:hover .todo_delete_btn {
     display: block;
 }
@@ -63,8 +67,6 @@
 }
 
 .todos_view input[type="checkbox"]{
-    -webkit-appearance: none;
-    -moz-appearance: none;
     position: relative;
     width: 17px;
     height: 17px;
@@ -75,8 +77,6 @@
 }
 
 .todos_view input[type="checkbox"] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
     position: relative;
     width: 17px;
     height: 17px;
