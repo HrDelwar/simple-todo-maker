@@ -17463,7 +17463,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AddTodo",
-  setup: function setup() {
+  props: ['todos'],
+  setup: function setup(props) {
     var todo_name = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
     var Swal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)('$swal');
 
@@ -17487,6 +17488,10 @@ __webpack_require__.r(__webpack_exports__);
               timer: 2000,
               position: 'bottom-end',
               showConfirmButton: false
+            });
+            props.todos.value = props.todos.unshift({
+              todo_name: todo_name.value,
+              id: res.id
             });
             todo_name.value = '';
           } else {
@@ -17570,16 +17575,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
+/* harmony import */ var _AddTodo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddTodo */ "./vue-src/components/AddTodo.vue");
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Todos",
+  components: {
+    AddTodo: _AddTodo__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   setup: function setup() {
     var todos = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
     var Swal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)('$swal');
-    var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_1__.useRouter)();
+    var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.useRouter)();
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
       fetchAllTodo();
     });
@@ -17909,7 +17919,7 @@ var _withScopeId = function _withScopeId(n) {
 };
 
 var _hoisted_1 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "All todos", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Todos", -1
   /* HOISTED */
   );
 });
@@ -17927,9 +17937,15 @@ var _hoisted_6 = {
 };
 var _hoisted_7 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_AddTodo = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AddTodo");
+
   var _component_unicon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("unicon");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.todos, function (_ref) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddTodo, {
+    todos: $setup.todos
+  }, null, 8
+  /* PROPS */
+  , ["todos"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.todos, function (_ref) {
     var completed = _ref.completed,
         id = _ref.id,
         todo_name = _ref.todo_name;
@@ -17999,10 +18015,6 @@ var routes = [{
   path: '/todos',
   name: 'Todos',
   component: _components_Todos__WEBPACK_IMPORTED_MODULE_0__["default"]
-}, {
-  path: '/add-todo',
-  name: 'AddTodo',
-  component: _components_AddTodo__WEBPACK_IMPORTED_MODULE_1__["default"]
 }];
 var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.createRouter)({
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.createWebHashHistory)(),
@@ -18125,7 +18137,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nh1[data-v-507fc5d4] {\n  color: gray;\n  font-size: 30px;\n  text-align: center;\n  text-transform: capitalize;\n}\n.title-wraper[data-v-507fc5d4]{\n  display: flex;\n  align-items: center;\n}\n.todo_container[data-v-507fc5d4] {\n  display: flex;\n  flex-wrap: wrap;\n}\n.todo_item[data-v-507fc5d4] {\n  width: 200px;\n  background: goldenrod;\n  margin: 10px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 8px;\n  border-radius: 4px;\n}\n.todo_title[data-v-507fc5d4]:first-letter {\n  text-transform: capitalize;\n}\n.todo_item.completed[data-v-507fc5d4] {\n  background: #1c7430;\n  color: white;\n  text-decoration: line-through;\n}\n.todo_item:hover .todo_delete_btn[data-v-507fc5d4] {\n  display: block;\n}\n.no_select[data-v-507fc5d4] {\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n.todo_delete_btn[data-v-507fc5d4] {\n  background: white;\n  border: 0;\n  border-radius: 4px;\n  color: red;\n  display: none;\n  cursor: pointer;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nh1[data-v-507fc5d4] {\n  color: gray;\n  font-size: 30px;\n  text-align: center;\n  text-transform: capitalize;\n}\n.title-wraper[data-v-507fc5d4]{\n  display: flex;\n  align-items: center;\n}\n.todo_container[data-v-507fc5d4] {\n  display: flex;\n  flex-wrap: wrap;\n}\n.todo_item[data-v-507fc5d4] {\n  width: 200px;\n  background: goldenrod;\n  margin: 10px 10px 10px 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 8px;\n  border-radius: 4px;\n}\n.todo_title[data-v-507fc5d4]:first-letter {\n  text-transform: capitalize;\n}\n.todo_item.completed[data-v-507fc5d4] {\n  background: #1c7430;\n  color: white;\n  text-decoration: line-through;\n}\n.todo_item:hover .todo_delete_btn[data-v-507fc5d4] {\n  display: block;\n}\n.no_select[data-v-507fc5d4] {\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n.todo_delete_btn[data-v-507fc5d4] {\n  background: white;\n  border: 0;\n  border-radius: 4px;\n  color: red;\n  display: none;\n  cursor: pointer;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

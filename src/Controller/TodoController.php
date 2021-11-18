@@ -9,7 +9,6 @@ class TodoController {
 
 	public function __construct() {
 		$this->model = new TodoModel();
-
 		add_action( 'wp_ajax_wpstm_create_todo', [ $this, 'wpstm_create_todo' ] );
 		add_action( 'wp_ajax_nopriv_wpstm_create_todo', [ $this, 'wpstm_create_todo' ] );
 	}
@@ -29,6 +28,8 @@ class TodoController {
 			$data = array(
 				'todo_name' => $todo_name,
 			);
+
+            $data = apply_filters('simple-todo-manager/todo_data', $data);
 
 
 			$result = $this->model->store( $data );

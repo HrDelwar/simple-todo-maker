@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>All todos</h1>
+    <h1>Todos</h1>
+
+    <AddTodo :todos="todos"/>
     <div class="todo_container">
       <div v-for="{completed, id, todo_name} in todos" :class="[Number(completed)?'completed':'']"
            @dblclick="changeTodoStatus(id)" class="todo_item"
@@ -25,9 +27,11 @@
 <script>
 import {onMounted, inject, ref} from 'vue'
 import {useRouter} from 'vue-router'
+import AddTodo from "./AddTodo";
 
 export default {
   name: "Todos",
+  components: {AddTodo},
   setup() {
     const todos = ref([])
     const Swal = inject('$swal')
@@ -189,7 +193,7 @@ h1 {
 .todo_item {
   width: 200px;
   background: goldenrod;
-  margin: 10px;
+  margin: 10px 10px 10px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;

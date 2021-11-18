@@ -49,14 +49,6 @@ class PluginAdmin
             'todos#/todos',
             array(&$this, 'load_view')
         );
-        add_submenu_page(
-            'todos',
-            'Add Todo',
-            'Add Todo',
-            'manage_options',
-            'todos#/add-todo',
-            array(&$this, 'load_view')
-        );
 
     }
 

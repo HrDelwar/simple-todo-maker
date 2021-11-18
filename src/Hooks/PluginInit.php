@@ -29,7 +29,6 @@ class PluginInit
     {
         new Activation();
         new Deactivation();
-        Uninstall::wpstm_uninstall();
         $this->wpstm_load_asset();
         new Router($this->loader);
         $this->loader->run();

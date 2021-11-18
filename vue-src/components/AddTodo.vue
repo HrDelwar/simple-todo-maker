@@ -22,7 +22,8 @@ import {ref, inject} from "vue";
 
 export default {
   name: "AddTodo",
-  setup() {
+  props: ['todos'],
+  setup(props) {
     let todo_name = ref('');
     const Swal = inject('$swal')
 
@@ -47,6 +48,10 @@ export default {
               timer: 2000,
               position: 'bottom-end',
               showConfirmButton: false,
+            })
+            props.todos.value = props.todos.unshift({
+              todo_name: todo_name.value,
+              id: res.id,
             })
             todo_name.value = ''
           } else {

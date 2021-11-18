@@ -62,21 +62,7 @@
     padding: 1px 7px;
 }
 
-.todos_view input[type="checkbox"]{
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    position: relative;
-    width: 17px;
-    height: 17px;
-    border: var(--form--border-width) solid var(--form--border-color);
-    background: var(--global--color-white);
-    border-radius: 2px;
-    border-width: 1px;
-}
-
 .todos_view input[type="checkbox"] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
     position: relative;
     width: 17px;
     height: 17px;
